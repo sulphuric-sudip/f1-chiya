@@ -10,6 +10,7 @@ function App() {
     "Bipul Kharal",
     "Hemant Basnet",
     "Biraj Bajracharya",
+    "Sachet Manandhar"
   ];
   const [name, setName] = useState(names[0]);
   const [sources, setSources] = useState([]);
