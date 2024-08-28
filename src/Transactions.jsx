@@ -50,6 +50,16 @@ export default function Transactions({from: currentUser}) {
                     }
                     return transaction;
                 })
+                receivableData.data.forEach((key, value) => {
+                    if (value === 0) return;
+                    if (!tempTransactions.find(transaction => transaction.to === key)) {
+                        tempTransactions.push({
+                            to: key,
+                            amount: 0,
+                            receivable: value
+                        })
+                    }
+                })
             } else {
                 console.error("Error in fetching trasnsactions:", receivableData)
             }
@@ -93,7 +103,7 @@ export default function Transactions({from: currentUser}) {
                                     {transaction.amount - transaction.receivable}
                                 </td>
                             </tr>
-                        )) || <tr><td colSpan="3" className="border px-4 py-2 text-center">No remaining transactions found</td></tr>
+                        )) || <tr><td colSpan="4" className="border px-4 py-2 text-center">No remaining transactions found</td></tr>
                     }
                 </tbody>
             </table>
