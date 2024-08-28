@@ -1,7 +1,7 @@
 import React from 'react';
 import Loading from './Loading';
 
-const baseURL = "https://script.google.com/macros/s/AKfycbyFEQkXyO08A21E3MZsjyvnWtOBoTsr-i4BmrOsb6M0-ZIyt9MD9X0s1ePL1cwvq_2Bjw/exec"
+const baseURL = "https://script.google.com/macros/s/AKfycbzcm1c2NJssPcKTNhqmTUnO4Jn_xZ8Zw6XlYRT7g08CllnuOVUAGuSWWhGnrduGPY_rpw/exec"
 
 export default function Transactions({from: currentUser}) {
     const [transactions, setTransactions] = React.useState([]);
