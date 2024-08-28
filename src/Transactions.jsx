@@ -50,7 +50,7 @@ export default function Transactions({from: currentUser}) {
                     }
                     return transaction;
                 })
-                receivableData.data.forEach((key, value) => {
+                Object.entries(receivableData.data).forEach(([key, value]) => {
                     if (value === 0) return;
                     if (!tempTransactions.find(transaction => transaction.to === key)) {
                         tempTransactions.push({
