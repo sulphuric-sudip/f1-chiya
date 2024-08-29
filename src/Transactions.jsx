@@ -10,6 +10,8 @@ export default function Transactions({from: currentUser}) {
     React.useEffect(() => {
         setLoading(true);
         var tempTransactions = [];
+        var totalPayable = 0;
+        var totalRecievable = 0;
         (async () => {
             const response = await fetch(`${baseURL}?from=${currentUser}`, {
                 method: 'GET',
@@ -23,6 +25,7 @@ export default function Transactions({from: currentUser}) {
             const data = await response.json();
             if (data.success) {
                 tempTransactions = Object.entries(data.data).map(([key, value]) => {
+                    totalPayable += value;
                     return {
                         to: key,
                         amount: value,
@@ -46,6 +49,7 @@ export default function Transactions({from: currentUser}) {
                 console.log(transactions)
                 tempTransactions.forEach(transaction => {
                     if (receivableData.data[transaction.to]) {
+                        totalRecievable += receivableData.data[transaction.to];
                         transaction.receivable = receivableData.data[transaction.to];
                     }
                     return transaction;
@@ -53,12 +57,18 @@ export default function Transactions({from: currentUser}) {
                 Object.entries(receivableData.data).forEach(([key, value]) => {
                     if (value === 0) return;
                     if (!tempTransactions.find(transaction => transaction.to === key)) {
+                        totalRecievable += value;
                         tempTransactions.push({
                             to: key,
                             amount: 0,
                             receivable: value
                         })
                     }
+                })
+                tempTransactions.push({
+                    to: "Total",
+                    amount: totalPayable,
+                    receivable: totalRecievable
                 })
             } else {
                 console.error("Error in fetching trasnsactions:", receivableData)
