@@ -5,6 +5,7 @@ import Transactions from './Transactions';
 
 function App() {
   const names = [
+    "Ajit Bom Malla",
     "Sudip Neupane",
     "Suven Pandey",
     "Prabin Thapa Magar",
@@ -12,7 +13,7 @@ function App() {
     "Bipul Kharal",
     "Hemant Basnet",
     "Biraj Bajracharya",
-    "Sachet Manandhar"
+    "Sachet Manandhar",
   ];
   const [imageSources, setImageSources] = useState([]);
   const [user, setUser] = useIdentity(names);
